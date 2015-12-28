@@ -1,0 +1,39 @@
+﻿@model StatusReportingApp.Models.LoginData
+@{
+    ViewBag.Title = "Admin Login";
+}
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="../../Content/themes/base/images/IH_logo.png" class="img center-block">
+                <h3 class="text-center bg-info">
+                    Administrator Access Area</h3>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Login", "AccountManagement", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.UserID, new { placeholder = "Enter your Username", @class = "form-control input-lg" })
+                        @Html.ValidationMessageFor(model => model.UserID)
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(model => model.Password, new { placeholder = "Enter your Password", @class = "form-control input-lg" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                    <div align="center">
+                        <span>
+                            <input type="submit" value="Login" class="btn btn-info" /></span> <span>
+                                <input type="reset" value="Reset" class="btn btn-danger" /></span>
+                    </div>
+                    <br />
+               
+                }
+                <div class="modal-footer">
+                </div>
+            </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

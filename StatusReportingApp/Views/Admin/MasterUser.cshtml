@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "MasterUser";
+    var grid = new WebGrid(source: Model, canPage: false);
+}
+@if (int.Parse(Session["GroupID"].ToString()) == 4 && int.Parse(Session["RoleID"].ToString()) == 3)
+{
+
+    <h2 class="text-center">
+        MasterUser</h2>
+    <div class="container">
+        <div class="row">
+            @grid.GetHtml(
+tableStyle: "table table-striped table-condensed table-responsive table-bordered",
+columns: grid.Columns(
+        grid.Column("RoleID", "Role ID"),
+        grid.Column("RoleName", "Type of Role")
+        )
+       )
+        </div>
+    </div>
+
+    using (Html.BeginForm("ExportData", "Export", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <input type="submit" name="Export" id="Export" value="Export to Excel Sheet" class="btn btn-info" />
+    }
+
+    <br />
+
+
+}
+else
+{
+    <h2 class="text-center">
+        You are not authorized to view this page</h2>  
+}

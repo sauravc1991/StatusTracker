@@ -1,0 +1,61 @@
+﻿@model DataAccessLayer.Entity.StatusReport
+@{
+    ViewBag.Title = "Edit";
+}
+<h2 class="text-center">
+    Edit</h2>
+@using (Html.BeginForm("Edit", "BAOperations", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+   
+
+    <fieldset>
+        <div class="container ">
+            @Html.HiddenFor(model => model.SerialNumber)
+            @Html.TextBoxFor(m => m.UserID, new { @Value = @Session["UserID"], @type = "hidden" })
+            <div class="form-group">
+                <label>
+                    JIRA ID</label>
+                @Html.TextBoxFor(model => model.JiraID, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.JiraID)
+            </div>
+            <div class="form-group">
+                <label>
+                    Employee Name</label>
+                @Html.TextBoxFor(model => model.EmployeeName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmployeeName)
+            </div>
+            <div class="form-group">
+                <label>
+                    Description</label>
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="form-group">
+                <label>
+                    PercentComplete</label>
+                @Html.TextBoxFor(model => model.PercentComplete, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PercentComplete)
+            </div>
+            <div class="form-group">
+                <label>
+                    PercentComplete</label>
+                @Html.TextBoxFor(model => model.PlanEndDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PlanEndDate)
+            </div>
+            <div class="form-group">
+                <label>
+                    Comments</label>
+                @Html.TextBoxFor(model => model.Comments, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Comments)
+            </div>
+            <div align="center">
+                <span>
+                    <input type="submit" value="Save" class="btn btn-info" />
+                </span>
+            </div>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmidsIHStatModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="EmidsIHStatModelStoreContainer">
+    <EntitySet Name="Group" EntityType="EmidsIHStatModel.Store.Group" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="EmidsIHStatModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusReport" EntityType="EmidsIHStatModel.Store.StatusReport" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="EmidsIHStatModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserData" EntityType="EmidsIHStatModel.Store.UserData" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__StatusRep__UserI__571DF1D5" Association="EmidsIHStatModel.Store.FK__StatusRep__UserI__571DF1D5">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="StatusReport" EntitySet="StatusReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserData__GroupI__4F7CD00D" Association="EmidsIHStatModel.Store.FK__UserData__GroupI__4F7CD00D">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="UserData" EntitySet="UserData" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserData__RoleID__4E88ABD4" Association="EmidsIHStatModel.Store.FK__UserData__RoleID__4E88ABD4">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserData" EntitySet="UserData" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="GroupName" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="StatusReport">
+    <Key>
+      <PropertyRef Name="SerialNumber" />
+    </Key>
+    <Property Name="SerialNumber" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="JiraID" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="EmployeeName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="PercentComplete" Type="int" Nullable="false" />
+    <Property Name="PlanEndDate" Type="date" />
+    <Property Name="Comments" Type="varchar" MaxLength="300" StoreGeneratedPattern="Computed" />
+    <Property Name="Timestamp" Type="date" Nullable="false" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="EmpName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__StatusRep__UserI__571DF1D5">
+    <End Role="UserData" Type="EmidsIHStatModel.Store.UserData" Multiplicity="1" />
+    <End Role="StatusReport" Type="EmidsIHStatModel.Store.StatusReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="StatusReport">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserData__GroupI__4F7CD00D">
+    <End Role="Group" Type="EmidsIHStatModel.Store.Group" Multiplicity="1" />
+    <End Role="UserData" Type="EmidsIHStatModel.Store.UserData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="UserData">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserData__RoleID__4E88ABD4">
+    <End Role="Role" Type="EmidsIHStatModel.Store.Role" Multiplicity="1" />
+    <End Role="UserData" Type="EmidsIHStatModel.Store.UserData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserData">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AuthenticateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="UPassword" Type="varchar" Mode="In" />
+    <Parameter Name="RetUserID" Type="int" Mode="InOut" />
+    <Parameter Name="RetName" Type="varchar" Mode="InOut" />
+    <Parameter Name="RetGroupID" Type="int" Mode="InOut" />
+    <Parameter Name="RetRoleId" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="ChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="int" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetCurrentRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetCurrentTeamRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GID" Type="int" Mode="In" />
+  </Function>
+</Schema>

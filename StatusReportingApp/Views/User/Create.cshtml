@@ -1,0 +1,67 @@
+﻿@model DataAccessLayer.Entity.UserData
+@{
+    ViewBag.Title = "Create";
+}
+@if (int.Parse(Session["GroupID"].ToString()) == 4 && int.Parse(Session["RoleID"].ToString()) == 3)
+{
+    <h2 class="text-center">
+        Create New User</h2>
+
+    using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+    
+        <div class="container col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <label>
+                    User Name</label>
+                @Html.TextBoxFor(model => model.UserName, new { placeholder = "Enter the Username", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+            <div class="form-group">
+                <label>
+                    Password</label>
+                @Html.PasswordFor(model => model.Password, new { placeholder = "Enter the Password", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            <div class="form-group">
+                <label>
+                    Employee Name</label>
+                @Html.TextBoxFor(model => model.EmpName, new { placeholder = "Enter the Employee name", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmpName)
+            </div>
+            <div class="form-group">
+                <label>
+                    Group ID</label>
+                @*@Html.DropDownList("GroupID", String.Empty)*@
+                @Html.DropDownList("GroupID", null, string.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GroupID)
+            </div>
+            <div class="form-group">
+                <label>
+                    Role ID</label>
+                @* @Html.DropDownList("RoleID", String.Empty)*@
+                @Html.DropDownList("RoleID", null, string.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoleID)
+            </div>
+            <div class="text-center">
+            <span>
+                <input type="submit" value="Create" class="btn btn-info" />
+            </span><span>
+                <input type="reset" value="Reset" class="btn btn-danger" />
+            </span><span><a href="/User" class="btn btn-default">Back to List</a> </span>
+        </div>
+        </div>
+        
+    
+    }
+}
+else
+{
+    <h2 class="text-center">
+        You are not authorized to view this page</h2>  
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

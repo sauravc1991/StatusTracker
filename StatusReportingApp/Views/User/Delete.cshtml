@@ -1,0 +1,63 @@
+﻿@model DataAccessLayer.Entity.UserData
+@{
+    ViewBag.Title = "Delete";
+}
+    <h3 align="center">
+        Are you sure you want to delete this?</h3>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <table class="table table-bordered table-responsive table-hover table-condensed table-striped"
+                    align="center">
+                    <tr>
+                        <td>
+                            <b>
+                                @Html.DisplayName("User Name")</b>
+                        </td>
+                        <td>@Html.DisplayFor(model => model.UserName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>@Html.DisplayName("Password")</b>
+                        </td>
+                        <td>@Html.DisplayFor(model => model.Password)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>@Html.DisplayName("Employee Name")</b>
+                        </td>
+                        <td>@Html.DisplayFor(model => model.EmpName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>@Html.DisplayName("Group ID")</b>
+                        </td>
+                        <td>@Html.DisplayFor(model => model.GroupID) (@Html.DisplayFor(model => model.Group.GroupName))
+                        </td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>@Html.DisplayName("Role ID")</b>
+                        </td>
+                        <td>@Html.DisplayFor(model => model.RoleID) (@Html.DisplayFor(model => model.Role.RoleName))
+                        </td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div align="center">
+            <span>
+                <input type="submit" value="Delete" class="btn btn-danger" /></span> <span><a href="/User"
+                    class="btn btn-info">Back to List</a></span>
+        </div>
+    }
+}

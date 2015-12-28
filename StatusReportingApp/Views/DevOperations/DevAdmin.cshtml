@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DataAccessLayer.Entity.GetCurrentTeamRecord_Result>
+@{
+    ViewBag.Title = "DevAdminHomepage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime dt = DateTime.Now;
+    string date = dt.ToString("D");	
+}
+@if (int.Parse(Session["GroupID"].ToString()) == 1 && int.Parse(Session["RoleID"].ToString()) == 1)
+{
+
+    <h2 class="text-center">
+        Welcome @Session["Name"]</h2>
+
+    <h3 class="text-center">
+        Team Task Report for @date</h3>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-responsive table-hover table-condensed table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayName("JIRA ID")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Employee Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Description")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Percentage Completion")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Plan End Date")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Comments")
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JiraID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmpName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PercentComplete)%
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlanEndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comments)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div align="center">
+        <a href="/DevOperations/GetDate" class="btn btn-info">Get Records</a>
+    </div>
+}
+else
+{
+    <h2 class="text-center">
+        You are not authorized to view this page</h2> 
+}

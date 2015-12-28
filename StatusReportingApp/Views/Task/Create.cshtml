@@ -1,0 +1,62 @@
+﻿@model DataAccessLayer.Entity.StatusReport
+@{
+    ViewBag.Title = "Create Status Report";
+}
+<h2 class="text-center">
+    Create Status Report</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    
+    <div class="container col-md-6 col-md-offset-3">
+        @Html.TextBoxFor(m => m.UserID, new { @Value = @Session["UserID"], @type = "hidden" })
+        <div class="form-group">
+            <label>
+                JIRA ID</label>
+            @Html.TextBoxFor(model => model.JiraID, new { placeholder = "Enter the JIRA ID", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.JiraID)
+        </div>
+        <div class="form-group">
+            <label>
+                Employee Name</label>
+            @Html.TextBoxFor(model => model.EmployeeName, new { placeholder = "Enter your name", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EmployeeName)
+        </div>
+        <div class="form-group">
+            <label>
+                Description</label>
+            @Html.TextAreaFor(model => model.Description, new { placeholder = "Enter task description", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div class="form-group">
+            <label>
+                Percentage Complete</label>
+            @Html.TextBoxFor(model => model.PercentComplete, new { placeholder = "Enter the percentage of task completion", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PercentComplete)
+        </div>
+        <div class="form-group">
+            <label>
+                Plan End Date</label>
+            @Html.TextBoxFor(model => model.PlanEndDate, new { placeholder = "Enter the Plan End Date in DD/MM/YY", @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.PlanEndDate)
+        </div>
+        <div class="form-group">
+            <label>
+                Comments</label>
+            @Html.TextAreaFor(model => model.Comments, new { placeholder = "Enter Comments (if any)", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+        <div class="text-center">
+            <span>
+                <input type="submit" value="Create" class="btn btn-info" />
+            </span><span>
+                <input type="reset" value="Reset" class="btn btn-danger" />
+            </span><span><a href="/Route/RouteUser" class="btn btn-info">Back to List</a></span>
+        </div>
+    </div>
+   
+        
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

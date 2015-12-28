@@ -1,0 +1,42 @@
+﻿@model StatusReportingApp.Models.DatePicker
+@{
+    ViewBag.Title = "Get Records by Date";
+}
+@if (int.Parse(Session["GroupID"].ToString()) == 2)
+{
+    <h2 class="text-center">
+        Get Records by Date</h2>
+    <br />
+    using (Html.BeginForm("GetRecordsByDate", "QAOperations", FormMethod.Post))
+    {
+    @Html.ValidationSummary(true)
+   
+    <div class="col-md-4 col-md-offset-4">
+        <div>
+            <label for="Start">
+                Start Date</label>
+            @Html.TextBoxFor(model => model.Start, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.Start)
+        </div>
+        <br />
+        <div>
+            <label for="End">
+                End Date</label>
+            @Html.TextBoxFor(model => model.End, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.End)
+        </div>
+        <br />
+        <div class="text-center">
+            <input type="submit" class="btn btn-info" value="Get Records" />
+        </div>
+    </div>
+    }
+}
+else
+{
+    <h2 class="text-center">
+        You are not authorized to view this page</h2> 
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

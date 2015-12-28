@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DataAccessLayer.Entity.UserData>
+@{
+    ViewBag.Title = "Index";
+}
+<h2 class="text-center">
+    User Manager</h2>
+    <br />
+<div class="text-center">
+    <a href="/User/Create" class="btn btn-info text-center">Click here to create a new
+        user</a>
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-responsive table-hover table-condensed table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayName("User Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Password")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Employee Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Group ID")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Role ID")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Operations")
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmpName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Group.GroupName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                        </td>
+                        <td>
+                          @*  @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |*@
+                            @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

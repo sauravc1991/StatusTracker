@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DataAccessLayer.Entity.StatusReport>
+@{
+    ViewBag.Title = "Task Status Manager";
+}
+<h2 class="text-center">Task Manager</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-responsive table-hover table-condensed table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayName("JIRA ID")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Employee Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Description")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Percentage Completion")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Plan End Date")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Comments")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Operations")
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JiraID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PercentComplete)%
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlanEndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>
+                        <td>
+                           @* @Html.ActionLink("Edit", "Edit", new { id = item.SerialNumber }) |*@
+                            @Html.ActionLink("Details", "Details", new { id = item.SerialNumber }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.SerialNumber })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

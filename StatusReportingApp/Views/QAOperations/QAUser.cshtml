@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DataAccessLayer.Entity.StatusReport>
+@{
+    ViewBag.Title = "BAUserHomePage";
+    DateTime dt = DateTime.Now;
+    string date = dt.ToString("D");	
+}
+@if (int.Parse(Session["GroupID"].ToString()) == 2 && int.Parse(Session["RoleID"].ToString()) == 2)
+{
+    <h2 class="text-center">
+        Welcome @Session["Name"]</h2>
+    <h2 class="text-center">
+        Task Report for @date</h2>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-responsive table-hover table-condensed table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayName("JIRA ID")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Employee Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Description")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Percentage Completion")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Plan End Date")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Comments")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Operations")
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JiraID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PercentComplete)%
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlanEndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comments)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.SerialNumber }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.SerialNumber })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div align="center">
+        <a href="/QAOperations/GetDate" class="btn btn-info">Get Records</a>
+    </div>
+}
+else
+{
+    <h2 class="text-center">
+        You are not authorized to view this page</h2> 
+}

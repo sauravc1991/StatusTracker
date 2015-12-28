@@ -1,0 +1,59 @@
+﻿@model DataAccessLayer.Entity.StatusReport
+@{
+    ViewBag.Title = "Details";
+}
+<h2 class="text-center">
+    Details</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="span6">
+            <table class="table table-bordered table-responsive table-hover table-condensed table-striped"
+                align="center">
+                <tr>
+                    <td>
+                        <b>
+                            @Html.DisplayName("JIRA ID")</b>
+                    </td>
+                    <td>@Html.DisplayFor(model => model.JiraID)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>@Html.DisplayName("Employee Name")</b>
+                    </td>
+                    <td>@Html.DisplayFor(model => model.EmployeeName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>@Html.DisplayName("Description")</b>
+                    </td>
+                    <td>@Html.DisplayFor(model => model.Description)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>@Html.DisplayName("Percentage Completion")</b>
+                    </td>
+                    <td>@Html.DisplayFor(model => model.PercentComplete)%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>@Html.DisplayName("Plan End Date")</b>
+                    </td>
+                    <td>@Html.DisplayFor(model => model.PlanEndDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>@Html.DisplayName("Comments")</b>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Comments)
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

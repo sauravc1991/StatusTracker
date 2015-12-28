@@ -1,0 +1,58 @@
+﻿@model DataAccessLayer.Entity.UserData
+@{
+    ViewBag.Title = "SignUp";
+}
+<h2>
+    SignUp</h2>
+@using (Html.BeginForm("SignUp", "AccountManagement", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>UserData</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmpName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EmpName)
+            @Html.ValidationMessageFor(model => model.EmpName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroupID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GroupID)
+            @Html.ValidationMessageFor(model => model.GroupID)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoleID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RoleID)
+            @Html.ValidationMessageFor(model => model.RoleID)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

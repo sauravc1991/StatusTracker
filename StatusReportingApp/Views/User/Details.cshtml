@@ -1,0 +1,51 @@
+﻿@model DataAccessLayer.Entity.UserData
+@{
+    ViewBag.Title = "Details";
+}
+<h2 class="text-center">
+    Details</h2>
+<br />
+<div class="container col-md-6 col-md-offset-3">
+    <table class="table table-bordered table-responsive table-hover table-condensed table-striped"
+        align="center">
+        <tr>
+            <td>
+                <b>
+                    @Html.DisplayName("User Name")</b>
+            </td>
+            <td>@Html.DisplayFor(model => model.UserName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayName("Password")</b>
+            </td>
+            <td>@Html.DisplayFor(model => model.Password)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayName("Employee Name")</b>
+            </td>
+            <td>@Html.DisplayFor(model => model.EmpName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayName("Group ID")</b>
+            </td>
+            <td>@Html.DisplayFor(model => model.GroupID) (@Html.DisplayFor(model => model.Group.GroupName))
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayName("Role ID")</b>
+            </td>
+            <td>@Html.DisplayFor(model => model.RoleID) (@Html.DisplayFor(model => model.Role.RoleName))
+            </td>
+        </tr>
+    </table>
+    <div class="text-center">
+        <a href="/User" class="btn btn-info">Back to List</a>
+    </div>
+</div>

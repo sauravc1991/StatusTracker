@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmidsIHStatModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="EmidsIHStatEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Groups" EntityType="EmidsIHStatModel.Group" />
+    <EntitySet Name="Roles" EntityType="EmidsIHStatModel.Role" />
+    <EntitySet Name="StatusReports" EntityType="EmidsIHStatModel.StatusReport" />
+    <EntitySet Name="sysdiagrams" EntityType="EmidsIHStatModel.sysdiagram" />
+    <EntitySet Name="UserDatas" EntityType="EmidsIHStatModel.UserData" />
+    <AssociationSet Name="FK__UserData__GroupI__4F7CD00D" Association="EmidsIHStatModel.FK__UserData__GroupI__4F7CD00D">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="UserData" EntitySet="UserDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserData__RoleID__4E88ABD4" Association="EmidsIHStatModel.FK__UserData__RoleID__4E88ABD4">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserData" EntitySet="UserDatas" />
+    </AssociationSet>
+    <FunctionImport Name="AuthenticateUser">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="UPassword" Mode="In" Type="String" />
+      <Parameter Name="RetUserID" Mode="InOut" Type="Int32" />
+      <Parameter Name="RetName" Mode="InOut" Type="String" />
+      <Parameter Name="RetGroupID" Mode="InOut" Type="Int32" />
+      <Parameter Name="RetRoleId" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="FK__StatusRep__UserI__571DF1D5" Association="EmidsIHStatModel.FK__StatusRep__UserI__571DF1D5">
+      <End Role="UserData" EntitySet="UserDatas" />
+      <End Role="StatusReport" EntitySet="StatusReports" />
+    </AssociationSet>
+    <FunctionImport Name="GetCurrentRecord" EntitySet="StatusReports" ReturnType="Collection(EmidsIHStatModel.StatusReport)">
+      <Parameter Name="UID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCurrentTeamRecord" ReturnType="Collection(EmidsIHStatModel.GetCurrentTeamRecord_Result)">
+      <Parameter Name="GID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ChangePassword">
+      <Parameter Name="uid" Mode="In" Type="Int32" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <Property Name="GroupName" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserDatas" Relationship="EmidsIHStatModel.FK__UserData__GroupI__4F7CD00D" FromRole="Group" ToRole="UserData" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserDatas" Relationship="EmidsIHStatModel.FK__UserData__RoleID__4E88ABD4" FromRole="Role" ToRole="UserData" />
+  </EntityType>
+  <EntityType Name="StatusReport">
+    <Key>
+      <PropertyRef Name="SerialNumber" />
+    </Key>
+    <Property Name="SerialNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="JiraID" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="PercentComplete" Type="Int32" Nullable="false" />
+    <Property Name="PlanEndDate" Type="DateTime" />
+    <Property Name="Comments" Type="String" MaxLength="300" Unicode="false" FixedLength="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="UserData" Relationship="EmidsIHStatModel.FK__StatusRep__UserI__571DF1D5" FromRole="StatusReport" ToRole="UserData" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="EmpName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group" Relationship="EmidsIHStatModel.FK__UserData__GroupI__4F7CD00D" FromRole="UserData" ToRole="Group" />
+    <NavigationProperty Name="Role" Relationship="EmidsIHStatModel.FK__UserData__RoleID__4E88ABD4" FromRole="UserData" ToRole="Role" />
+    <NavigationProperty Name="StatusReports" Relationship="EmidsIHStatModel.FK__StatusRep__UserI__571DF1D5" FromRole="UserData" ToRole="StatusReport" />
+  </EntityType>
+  <Association Name="FK__UserData__GroupI__4F7CD00D">
+    <End Role="Group" Type="EmidsIHStatModel.Group" Multiplicity="1" />
+    <End Role="UserData" Type="EmidsIHStatModel.UserData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="UserData">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserData__RoleID__4E88ABD4">
+    <End Role="Role" Type="EmidsIHStatModel.Role" Multiplicity="1" />
+    <End Role="UserData" Type="EmidsIHStatModel.UserData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserData">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StatusRep__UserI__571DF1D5">
+    <End Type="EmidsIHStatModel.UserData" Role="UserData" Multiplicity="1" />
+    <End Type="EmidsIHStatModel.StatusReport" Role="StatusReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="StatusReport">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetCurrentTeamRecord_Result">
+    <Property Type="String" Name="JiraID" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="300" />
+    <Property Type="Int32" Name="PercentComplete" Nullable="false" />
+    <Property Type="DateTime" Name="PlanEndDate" Nullable="true" />
+    <Property Type="String" Name="Comments" Nullable="true" MaxLength="300" />
+  </ComplexType>
+</Schema>
