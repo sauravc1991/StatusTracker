@@ -67,3 +67,22 @@ E:\Influence Helath TrackerTool\Changeable\StatusReportingApp V1.2  (UI changed)
 E:\Influence Helath TrackerTool\Changeable\StatusReportingApp V1.2  (UI changed)\StatusReportingApp\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
 E:\Influence Helath TrackerTool\Changeable\StatusReportingApp V1.2  (UI changed)\StatusReportingApp\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 E:\Influence Helath TrackerTool\Changeable\StatusReportingApp V1.2  (UI changed)\StatusReportingApp\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.Helpers.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.Mvc.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.Razor.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.WebPages.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.WebPages.Razor.dll
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.Helpers.xml
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.Mvc.xml
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.Razor.xml
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.WebPages.xml
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\GIT\StatusTracker\DataAccessLayer\bin\Debug\System.Web.WebPages.Razor.xml
+D:\GIT\StatusTracker\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\GIT\StatusTracker\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+D:\GIT\StatusTracker\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
